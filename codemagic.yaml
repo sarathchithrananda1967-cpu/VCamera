@@ -13,19 +13,25 @@ workflows:
       - name: Set up local.properties
         script: |
           echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/local.properties"
+      
+      - name: Download Gradle Wrapper
+        script: |
+          gradle wrapper --gradle-version 7.4
+      
       - name: Grant execute permission for gradlew
         script: |
           chmod +x gradlew
+      
       - name: Build Android APK
         script: |
-          ./gradlew assembleDebug
+          ./gradlew assembleDebug --stacktrace
     artifacts:
       - app/build/outputs/**/*.apk
       - app/build/outputs/**/mapping.txt
     publishing:
       email:
         recipients:
-          - your-email@example.com
+          - your-sarathchithrananda1967@gmail.com
         notify:
           success: true
           failure: true
